@@ -7,6 +7,9 @@ from base_caching import BaseCaching
 
 
 class LFUCache(BaseCaching):
+    """
+    Inherits from BaseCaching and is a caching system
+    """
     def __init__(self):
         """
         Initialize LFUCache object & call parent class constructor
