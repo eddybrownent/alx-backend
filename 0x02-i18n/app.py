@@ -2,6 +2,8 @@
 """
 Flask app
 """
+from datetime import datetime
+import pytz
 from typing import Union, Dict
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
@@ -55,9 +57,6 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-# babel.init_app(app, locale_selector=get_locale)
-
-
 @babel.timezoneselector
 def get_timezone():
     """
@@ -79,6 +78,10 @@ def get_timezone():
             pass
 
     return Config.BABEL_DEFAULT_TIMEZONE
+
+
+# babel.init_app(app, locale_selector=get_locale,
+#               timezone_selector=get_timezone)
 
 
 def get_user(user_id: int) -> Union[Dict, None]:
@@ -110,7 +113,14 @@ def hello_Hoblerton() -> str:
     """
     simply outputs “Hello world”
     """
-    return render_template('6-index.html')
+    current_time = datetime.now(pytz.timezone(
+        g.timezone)) if g.timezone else datetime.utcnow()
+
+    formatted_time = current_time.strftime(
+        '%b %d, %Y, %I:%M:%S %p'
+        ) if get_locale() == 'en' else current_time.strftime(
+            '%d %b %Y à %H:%M:%S')
+    return render_template('index.html', formatted_time=formatted_time)
 
 
 if __name__ == '__main__':
