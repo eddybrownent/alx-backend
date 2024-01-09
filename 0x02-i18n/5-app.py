@@ -50,11 +50,24 @@ def get_locale() -> str:
 
 
 def get_user(user_id: int) -> Union[Dict, None]:
+    """
+    Get user information based on user ID
+
+    Args:
+        user_id (int): The ID of the user to retrieve
+
+    Returns:
+        Union[Dict, None]]]: dict containing user infor
+        or None if the user ID is not found
+    """
     return users.get(user_id)
 
 
 @app.before_request
 def before_request():
+    """
+    to find a user if any
+    """
     user_id = request.args.get('login_as')
     g.user = get_user(int(user_id)) if user_id else None
 
