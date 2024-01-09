@@ -26,7 +26,7 @@ app.config.from_object(Config)
 app.url_map.strict_slashes = False
 
 
-# @babel.localeselector
+@babel.localeselector
 def get_locale() -> str:
     """
     determineS best match with supported languages
