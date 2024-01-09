@@ -2,6 +2,7 @@
 """
 Flask app
 """
+from typing import Union, Dict
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
@@ -48,7 +49,7 @@ def get_locale() -> str:
 # babel.init_app(app, locale_selector=get_locale)
 
 
-def get_user(user_id):
+def get_user(user_id: int) -> Union[Dict, None]:
     return users.get(user_id)
 
 
