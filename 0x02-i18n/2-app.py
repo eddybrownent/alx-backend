@@ -27,7 +27,7 @@ app.url_map.strict_slashes = False
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     determineS best match with supported languages
     """
@@ -37,7 +37,7 @@ def get_locale():
 
 
 @app.route('/')
-def hello_Hoblerton():
+def hello_Hoblerton() -> str:
     """
     simply outputs “Hello world”
     """
